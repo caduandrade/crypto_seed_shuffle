@@ -1,3 +1,4 @@
+import 'package:crypto_seed_shuffle/shuffle.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,11 +25,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late List<int> _keyNumbers;
+
+  @override
+  void initState() {
+    super.initState();
+    final List<int> swappers = [3, 7, 1, 0];
+    Shuffle shuffle = Shuffle(seedLength: 24, swappers: swappers);
+    _keyNumbers = shuffle.execute();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('?'),
+          title: Text(_keyNumbers.join(' ')),
         ),
         body: const Center());
   }
