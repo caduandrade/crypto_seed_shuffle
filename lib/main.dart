@@ -1,4 +1,5 @@
 import 'package:crypto_seed_shuffle/shuffle.dart';
+import 'package:crypto_seed_shuffle/swapper.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    final List<int> swappers = [3, 7, 1, 0];
+    final List<int> swappers = Swapper.fromCharacters('249301');
     Shuffle shuffle = Shuffle(seedLength: 24, swappers: swappers);
     _keyNumbers = shuffle.execute();
   }
@@ -39,8 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(_keyNumbers.join(' ')),
+          title: const Text('Crypto seed shuffle'),
         ),
-        body: const Center());
+        body: Center(child: Text(_keyNumbers.join(' '))));
   }
 }
